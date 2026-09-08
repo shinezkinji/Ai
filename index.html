@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Keamanan Jaringan — shinezkinji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+
+<canvas id="bgnet"></canvas>
+
+<!-- ===== HERO ===== -->
+<section class="hero-landing">
+  <div class="hero-badge">🔒 Network Security Presentation</div>
+  <h1 class="hero-glow">Sistem Keamanan<br>Jaringan</h1>
+  <p class="hero-desc">Pelajari bagaimana firewall, IDS/IPS, enkripsi, dan pertahanan berlapis lainnya melindungi jaringan dari ancaman siber — lengkap dengan visualisasi trafik secara real-time.</p>
+  <div class="hero-cta-row">
+    <a href="asuna.html" class="cta-btn">🤖 Chat Asuna AI &rarr;</a>
+    <a href="#materi" class="cta-btn ghost">Lihat Materi &darr;</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat"><span class="hnum" id="statScanned">0</span><span class="hlabel">Paket dipindai</span></div>
+    <div class="hstat"><span class="hnum" id="statPassed">0</span><span class="hlabel">Trafik sah</span></div>
+    <div class="hstat"><span class="hnum red" id="statBlocked">0</span><span class="hlabel">Ancaman diblokir</span></div>
+  </div>
+</section>
+
+<!-- ===== VISUALISASI ===== -->
+<section class="viz-section">
+  <h2>Simulasi Trafik Jaringan <span class="live-dot"></span></h2>
+  <p class="viz-sub">Trafik masuk dipindai firewall — paket sah diteruskan ke server, ancaman diblokir.</p>
+  <div class="canvas-wrap">
+    <canvas id="netcanvas"></canvas>
+  </div>
+  <div class="legend">
+    <span><i class="swatch" style="background:var(--gold)"></i> Trafik masuk</span>
+    <span><i class="swatch" style="background:var(--green)"></i> Lolos verifikasi</span>
+    <span><i class="swatch" style="background:var(--red)"></i> Diblokir firewall</span>
+    <span><i class="swatch" style="background:var(--amber)"></i> Firewall / IDS</span>
+  </div>
+</section>
+
+<!-- ===== MATERI ===== -->
+<section class="materi-section" id="materi">
+  <h2>Struktur Sistem Keamanan Jaringan</h2>
+  <p class="materi-sub">Sistem keamanan jaringan adalah kumpulan lapisan pertahanan yang bekerja bersama melindungi data, perangkat, dan layanan dari ancaman siber. Berikut komponen utamanya:</p>
+
+  <div class="materi-grid">
+    <div class="materi-card"><div class="materi-icon">🧱</div><h3>Firewall</h3><p>Penyaring lalu lintas pertama di perbatasan jaringan. Memblokir koneksi mencurigakan berdasarkan aturan IP, port, dan protokol. Contoh: pfSense, Cisco ASA.</p></div>
+    <div class="materi-card"><div class="materi-icon">👁️</div><h3>IDS / IPS</h3><p>Intrusion Detection &amp; Prevention System memantau pola trafik untuk mendeteksi dan mencegah serangan secara real-time. Contoh: Snort, Suricata.</p></div>
+    <div class="materi-card"><div class="materi-icon">🔐</div><h3>VPN &amp; Enkripsi</h3><p>Membuat jalur terenkripsi (SSL/TLS, IPsec) agar data yang lewat internet tidak bisa dibaca pihak ketiga. Contoh: WireGuard, OpenVPN.</p></div>
+    <div class="materi-card"><div class="materi-icon">🛡️</div><h3>Antivirus / Anti-malware</h3><p>Mendeteksi, mengarantina, dan membersihkan virus, trojan, ransomware, dan spyware di setiap perangkat (endpoint) dalam jaringan.</p></div>
+    <div class="materi-card"><div class="materi-icon">🔑</div><h3>Autentikasi &amp; Akses Kontrol</h3><p>Hanya pengguna sah yang boleh masuk: password kuat, MFA (multi-factor), role-based access, dan Network Access Control (NAC).</p></div>
+    <div class="materi-card"><div class="materi-icon">🗂️</div><h3>Segmentasi &amp; DMZ</h3><p>Jaringan dipisah menjadi zona (guest, internal, DMZ untuk server publik) supaya satu titik bobol tidak langsung menyebar ke seluruh sistem.</p></div>
+    <div class="materi-card"><div class="materi-icon">📊</div><h3>Monitoring &amp; Logging (SIEM)</h3><p>Semua aktivitas dicatat dan dianalisis terpusat untuk mendeteksi anomali serta peringatan dini. Contoh: Wazuh, Splunk, ELK.</p></div>
+    <div class="materi-card"><div class="materi-icon">🔄</div><h3>Patch &amp; Update</h3><p>Celah keamanan ditutup lewat pembaruan rutin sistem operasi, aplikasi, dan firmware — pertahanan paling dasar tapi sering diabaikan.</p></div>
+  </div>
+
+  <h2 class="materi-title-2">Alur Pertahanan Berlapis (Defense in Depth)</h2>
+  <div class="defense-flow">
+    <div class="flow-step"><div class="flow-num">1</div><h4>Perimeter</h4><p>Firewall &amp; router menyaring trafik dari internet</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-num">2</div><h4>Deteksi</h4><p>IDS/IPS mengenali pola serangan dan mencatat log</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-num">3</div><h4>Perlindungan Data</h4><p>Enkripsi &amp; VPN menjaga kerahasiaan data</p></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step"><div class="flow-num">4</div><h4>Pemulihan</h4><p>Backup &amp; respons insiden meminimalkan kerugian</p></div>
+  </div>
+
+  <div class="cta-center">
+    <a href="asuna.html" class="cta-btn big">Tanya Asuna AI tentang materi ini &rarr;</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <img src="https://github.com/shinezkinji.png" alt="shinezkinji" class="footer-avatar">
+  <span>Dibuat oleh <b>shinezkinji</b> — Simulasi untuk keperluan presentasi</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
