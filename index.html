@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asuna AI — Sistem Keamanan Jaringan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-head">
+    <div>
+      <div class="hero-title-row">
+        <img src="https://github.com/shinezkinji.png" alt="shinezkinji" class="avatar">
+        <h1>Asuna AI</h1>
+      </div>
+      <p>Visualisasi lalu lintas jaringan secara langsung — trafik aman diteruskan, ancaman diblokir di firewall. Tanya apa saja tentang keamanan jaringan di bawah.</p>
+      <p class="disclaimer">Simulasi ilustratif untuk keperluan presentasi — bukan sistem pemantauan jaringan sungguhan.</p>
+    </div>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      Monitoring aktif
+    </div>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="netcanvas"></canvas>
+  </div>
+
+  <div class="legend">
+    <span><i class="swatch" style="background:var(--gold)"></i> Trafik masuk</span>
+    <span><i class="swatch" style="background:var(--green)"></i> Lolos verifikasi</span>
+    <span><i class="swatch" style="background:var(--red)"></i> Diblokir firewall</span>
+    <span><i class="swatch" style="background:var(--amber)"></i> Firewall / IDS</span>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat scanned">
+      <div class="num" id="statScanned">0</div>
+      <div class="label">Paket dipindai</div>
+    </div>
+    <div class="stat passed">
+      <div class="num" id="statPassed">0</div>
+      <div class="label">Trafik sah diteruskan</div>
+    </div>
+    <div class="stat blocked">
+      <div class="num" id="statBlocked">0</div>
+      <div class="label">Ancaman diblokir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MATERI: STRUKTUR SISTEM KEAMANAN JARINGAN ===== -->
+<section class="materi-section" id="materi">
+  <h2>Struktur Sistem Keamanan Jaringan</h2>
+  <p class="materi-sub">Sistem keamanan jaringan adalah kumpulan lapisan pertahanan yang bekerja bersama melindungi data, perangkat, dan layanan dari ancaman siber. Berikut komponen utamanya:</p>
+
+  <div class="materi-grid">
+    <div class="materi-card">
+      <div class="materi-icon">🧱</div>
+      <h3>Firewall</h3>
+      <p>Penyaring lalu lintas pertama di perbatasan jaringan. Memblokir koneksi mencurigakan berdasarkan aturan IP, port, dan protokol. Contoh: pfSense, Cisco ASA.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">👁️</div>
+      <h3>IDS / IPS</h3>
+      <p>Intrusion Detection &amp; Prevention System memantau pola trafik untuk mendeteksi dan mencegah serangan secara real-time, misalnya Snort dan Suricata.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">🔐</div>
+      <h3>VPN &amp; Enkripsi</h3>
+      <p>Membuat jalur terenkripsi (SSL/TLS, IPsec) agar data yang lewat internet tidak bisa dibaca pihak ketiga. Contoh: WireGuard, OpenVPN.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">🛡️</div>
+      <h3>Antivirus / Anti-malware</h3>
+      <p>Mendeteksi, mengarantina, dan membersihkan virus, trojan, ransomware, dan spyware di setiap perangkat (endpoint) dalam jaringan.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">🔑</div>
+      <h3>Autentikasi &amp; Akses Kontrol</h3>
+      <p>Memastikan hanya pengguna sah yang masuk: password kuat, MFA (multi-factor), role-based access, dan Network Access Control (NAC).</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">🗂️</div>
+      <h3>Segmentasi &amp; DMZ</h3>
+      <p>Jaringan dipisah menjadi zona (guest, internal, DMZ untuk server publik) supaya satu titik bobol tidak langsung menyebar ke seluruh sistem.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">📊</div>
+      <h3>Monitoring &amp; Logging (SIEM)</h3>
+      <p>Semua aktivitas dicatat dan dianalisis terpusat untuk mendeteksi anomali serta memberi peringatan dini. Contoh: Wazuh, Splunk, ELK.</p>
+    </div>
+    <div class="materi-card">
+      <div class="materi-icon">🔄</div>
+      <h3>Patch &amp; Update</h3>
+      <p>Celah keamanan ditutup lewat pembaruan rutin sistem operasi, aplikasi, dan firmware — patch management adalah pertahanan paling dasar.</p>
+    </div>
+  </div>
+
+  <h2 class="materi-title-2">Alur Pertahanan Berlapis (Defense in Depth)</h2>
+  <div class="defense-flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <h4>Perimeter</h4>
+      <p>Firewall &amp; router menyaring trafik dari internet</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <h4>Deteksi</h4>
+      <p>IDS/IPS mengenali pola serangan dan mencatat log</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <h4>Perlindungan Data</h4>
+      <p>Enkripsi &amp; VPN menjaga kerahasiaan data</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <h4>Pemulihan</h4>
+      <p>Backup &amp; respons insiden meminimalkan kerugian</p>
+    </div>
+  </div>
+</section>
+
+<section class="chat-section">
+  <h2>Tanya Asuna AI</h2>
+  <p>Bertanya soal firewall, enkripsi, VPN, atau ancaman siber apa pun — Asuna AI akan cari jawaban terbaru di internet dan menyertakan sumbernya.</p>
+
+  <div class="key-box" id="keyBox">
+    <label for="apiKeyInput">Groq API Key — gratis, tanpa kartu kredit, limit ~14.400 request/hari (tersimpan di browser HP/laptop ini, otomatis terisi tiap kamu buka halaman ini lagi)</label>
+    <input type="password" id="apiKeyInput" placeholder="gsk_..." autocomplete="off">
+    <button type="button" id="forgetKeyBtn" style="margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:3px;font-family:inherit;font-size:11px;cursor:pointer;">Lupakan key ini dari browser</button>
+    <div class="note">⚠️ Untuk situs publik, jangan taruh API key di sisi client. Gunakan backend proxy agar key tidak terlihat pengguna lain. Ambil key gratis di <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--red)">console.groq.com/keys</a></div>
+  </div>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="empty-hint" id="emptyHint">Belum ada percakapan.<br>Masukkan API key di atas, lalu mulai bertanya ke Asuna AI.</div>
+  </div>
+
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Contoh: Apa itu serangan DDoS dan cara mencegahnya?">
+    <button id="sendBtn">Kirim</button>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
