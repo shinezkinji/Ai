@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asuna AI — Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="index.html" class="back-btn">&larr; Sistem Keamanan Jaringan</a>
+  <div class="topbar-user">
+    <img src="https://github.com/shinezkinji.png" alt="shinezkinji" class="avatar-sm-static">
+    <span>shinezkinji</span>
+  </div>
+</nav>
+
+<section class="chat-hero">
+  <img src="https://github.com/shinezkinji.png" alt="Asuna AI" class="avatar avatar-xl">
+  <h1>Asuna AI</h1>
+  <p>Asisten keamanan jaringan — tanya soal firewall, enkripsi, VPN, atau ancaman siber, jawaban dicari langsung dari internet lengkap dengan sumbernya.</p>
+</section>
+
+<section class="chat-section">
+  <div class="key-box show" id="keyBox">
+    <label for="apiKeyInput">Groq API Key — gratis, tanpa kartu kredit, limit ~14.400 request/hari (tersimpan di browser ini)</label>
+    <input type="password" id="apiKeyInput" placeholder="gsk_..." autocomplete="off">
+    <button type="button" id="forgetKeyBtn" style="margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:3px;font-family:inherit;font-size:11px;cursor:pointer;">Lupakan key ini dari browser</button>
+    <div class="note">⚠️ Untuk situs publik, jangan taruh API key di sisi client. Ambil key gratis di <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--red)">console.groq.com/keys</a></div>
+  </div>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="empty-hint" id="emptyHint">Belum ada percakapan.<br>Masukkan API key di atas, lalu mulai bertanya ke Asuna AI.</div>
+  </div>
+
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Contoh: Apa itu serangan DDoS dan cara mencegahnya?">
+    <button id="sendBtn">Kirim</button>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <img src="https://github.com/shinezkinji.png" alt="shinezkinji" class="footer-avatar">
+  <span>Dibuat oleh <b>shinezkinji</b> — <a href="index.html" style="color:var(--red)">kembali ke halaman utama</a></span>
+</footer>
+
+<script src="chat.js"></script>
+</body>
+</html>
